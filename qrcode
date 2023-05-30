@@ -1,1 +1,137 @@
+//package cs160;
+import java.util.*;
+/**
+ * Program #1
+ * This program will generate a random QR Code!
+ * CS-160-1
+ * Feb 4th, 2022
+ * @author Anthony Barbaro
+  */
+public class QRCode {
+	private static int[][]grid;
+	private int DEFAULT_SEED = 160;
+	private int DEFAULT_DIMENSION = 30;
+	int seed;
+	int dim;
+	
+	//creates a pattern to use in setGrid with random numbers and a certain seed to test the program
+	public int[] createPattern(int dim, int seed) {
+		Random rand = new Random(seed);
+		int[] randArray = new int[dim*dim];
+		for(int i = 0; i < randArray.length; i++) {
+			//creates random 0s and 1s
+			randArray[i] = rand.nextInt(2);
+			
+		}
+		return randArray;
+		
+	}
+	//Sets the grid in size, and pattern
+	public  void setGrid(int dim, int[] pattern) {
+		//makes the grid the size of the inputed dimensions
+		grid = new int[dim][dim];
+		//temp variable is used because it never resets 
+		int temp=0;
+		for(int row = 0; row < dim; row++) {
+			for(int col = 0;col < dim; col++) {
+				
+				grid[row][col] = pattern[temp];
+				temp++;
+
+			}
+		}
+	}
+	//Getter method to return the private grid member 
+	public int[][]getGrid(){
+		
+		return grid;
+	}
+	//Overload method of print for 2D Array
+	public void print(int[][] matrix) {
+		for(int row = 0; row < matrix.length; row++) {
+			for(int col = 0; col < matrix[0].length; col++){
+				System.out.print(matrix[row][col]);
+			}
+			System.out.println();
+		}
+		
+	}
+	//Overload method of print for 1D Array
+	public void print(int[] pattern) {
+		for(int row = 0; row < pattern.length; row++){
+			for(int col = 0; col < pattern.length; col++) {
+				System.out.print(pattern[col]);
+			}
+			System.out.println();
+		}
+	}
+	//Used to print the grid member in main
+	public void print() {
+		for(int row = 0; row < grid.length; row++) {
+			for(int col = 0; col < grid.length; col++){
+				System.out.print(grid[row][col]);
+			}
+			System.out.println();
+		}
+	}
+	//This method creates a 15x15 of 1s, 11x11 of 0s, 7x7 of 2s, and a 3x3 of 3s
+	//Used to create 
+	public void setFinder(int xPos, int yPos) {
+		int i;
+		int x;
+		//15x15
+		for(i = xPos; i < xPos+15; i++) {
+			for(x = yPos; x < yPos+15; x++) {
+			grid[i][x] = 1;
+			}
+		}
+		//11x11
+		for(i = xPos+2; i < xPos+13; i++) {
+			for(x = yPos+2; x < yPos+13; x++) {
+				grid[i][x] = 0;
+			}
+		}
+		//7x7
+		for(i = xPos+4; i < xPos+11; i++) {
+			for(x = yPos+4; x < yPos+11; x++) {
+				grid[i][x] = 2;
+			}
+		}
+		//3x3
+		for(i = xPos+6; i < xPos+9; i++) {
+			for(x = yPos+6; x < yPos+9; x++) {
+				grid[i][x] = 3;
+			}
+		}
+		
+		
+		
+	}
+	public static void main(String args[]) {
+		
+		//Object to call all the instances 	
+		QRCode qr = new QRCode();
+		
+		//creates the pattern if there isn't a command line
+		int[] pat = qr.createPattern(qr.DEFAULT_DIMENSION, qr.DEFAULT_SEED);
+		
+		//Filters whether or not there is a command line
+		if(args.length < 1) {
+			//Default Values
+			qr.setGrid(qr.DEFAULT_DIMENSION,pat);
+		}
+		else {
+			//if there is a command line, this will run
+			qr.dim = Integer.parseInt(args[0]);
+			qr.seed = Integer.parseInt(args[1]);
+			qr.setGrid(qr.dim,qr.createPattern(qr.dim,qr.seed) );
+		}
+		//Set Finder creates blocked squares 
+		qr.setFinder(0, 0);
+		qr.setFinder(grid.length-15, 0);
+		qr.setFinder(0, grid.length-15);
+		qr.print();
+		
+	}
+}
 
