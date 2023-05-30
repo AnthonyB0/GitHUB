@@ -1,0 +1,55 @@
+Author: Anthony Barbaro
+Completion Date: 03-08-2023
+classname.cpp: Implementation file for LinkedList
+Description of the role or purpose of objects of this class goes here.
+
+The LinkedList class is designed to create a linked list data structure that can store multiple Nodes. Each Node stores an integer redid, first name, last name and a pointer to the next Node. LinkedList class contains various functions to manipulate the data in the list.
+
+PUBLIC MEMBER VARIABLES
+Node *head; - Points to the first element in the list
+Node *tail; - Points to the last element in the list
+int length; - Number of elements in the list
+
+CONSTRUCTORS
+LinkedList(int value, string first, string last):
+Constructor that initializes the LinkedList with one Node containing integer value, first and last name
+
+Destructor:
+Deallocates memory and deletes all the nodes in the list
+
+OTHER PUBLIC MEMBER FUNCTIONS
+printList():
+Prints all the elements in the list.
+
+getHead():
+Prints the redid, first and last name of the first element in the list.
+
+getTail():
+Prints the redid, first and last name of the last element in the list.
+
+getLength():
+Prints the length of the list.
+
+get(int index):
+Returns a pointer to the Node at the specified index. If the index is out of range, it returns nullptr.
+
+set(int index, int value, string first, string last):
+Sets the value, first and last name of the Node at the specified index. If the index is out of range, it returns false.
+
+append(int value, string first, string last):
+Appends a new Node to the end of the list with the specified value, first and last name.
+
+prepend(int value, string first, string last):
+Prepends a new Node to the start of the list with the specified value, first and last name.
+
+insert(int index, int value, string first, string last):
+Inserts a new Node with the specified value, first and last name at the specified index. If the index is out of range, it returns false.
+
+deleteFirst():
+Deletes the first Node in the list.
+
+deleteLast():
+Deletes the last Node in the list.
+
+Precondition: LinkedList class object has been initialized.
+Postcondition: The class methods can be used to manipulate and retrieve data from the linked list object.
