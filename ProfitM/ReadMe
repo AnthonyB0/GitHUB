@@ -1,0 +1,5 @@
+First two Screenshots show the input file then the output file then it shows the excel files in the folder 
+
+You will have one csv file of products, with the cost, and how much you sell it for and it will the most profitable items for your business 
+
+The output is a new csv file so the oringal file isn't changed and a new file named Profit.csv is the output file
